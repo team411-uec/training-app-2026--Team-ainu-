@@ -320,7 +320,30 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+.btn--mute {
+  font-size: 18px;
+  padding: 12px 20px;
+  color: #fff;
+  background-color: #4a5568;
+  border: 1px solid #718096;
+  border-bottom: 5px solid #2d3748;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.1s ease;
+  min-width: 100px;
+}
 
+.btn--mute:hover {
+  background-color: #718096;
+}
+
+/* ミュート（OFF）状態の時の見た目 */
+.btn--mute.is-muted {
+  background-color: #e53e3e;
+  border-color: #fc8181;
+  border-bottom-color: #9b2c2c;
+  color: #fff;
+}
     </style>
   </head>
 
@@ -349,6 +372,9 @@
       <audio id="reset-sound" preload="auto">
       <source src="Juggler レバー-edited-2026-08-30T05-52-54.mp3" type="audio/mp3">
     </audio>
+    <button class="btn--mute btn--shadow" id="mute-button">
+    🔊 ON
+  </button>
     </div>
 
     <!--
