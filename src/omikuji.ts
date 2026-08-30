@@ -48,5 +48,11 @@ export function drawOmikuji(): OmikujiResult | null {
   return drawnTicket;
 }
 
+/**
+ * 現在の箱の中にある残りくじ枚数を返します。
+ */
+export function getRemainingCount(): number {
+  return tickets.length;
+}
 // 拡張ポイント（ステップ2以降）。必要になったら足す。
 //  - 残りくじ枚数を出す: tickets.length を返す関数をこのファイルに足す（tickets は外から読めない）。
