@@ -17,7 +17,10 @@ import type { OmikujiResult } from "./omikuji";
 export function renderResult(result: OmikujiResult | null): void {
   renderApp();
   const resultElement = document.getElementById("result");
-
+  const gekiatsuAudio = document.getElementById("gekiatsu-sound") as HTMLAudioElement | null;
+  const drawAudio = document.getElementById("draw-sound") as HTMLAudioElement | null;
+  const daikichiAudio = document.getElementById("daikichi-sound") as HTMLAudioElement | null;
+ 
   if (!resultElement) return;
 
   // リセット時
@@ -29,16 +32,33 @@ export function renderResult(result: OmikujiResult | null): void {
 
   // 大吉の場合
   if (result === "大吉") {
+    if (gekiatsuAudio) {
+      gekiatsuAudio.currentTime = 0;
+      gekiatsuAudio.play().catch((err) => console.log("大吉音再生エラー", err));
+    }
     // 激アツ演出開始
     resultElement.classList.add("gekiaTsu");
     resultElement.textContent = "激アツ！！";
 
     // 1.2秒後に「大吉」に変更
     setTimeout(() => {
-      resultElement.textContent = "大吉";
-      resultElement.classList.remove("gekiaTsu");
-    }, 1200);
+if (daikichiAudio) {
+        daikichiAudio.currentTime = 0;
+        daikichiAudio.play().catch((err: Error) => console.log("大吉確定音再生エラー:", err));
+      }
+
+// 後光オーラ（daikichi-aura）と 飛び出る大吉文字（daikichi-impact）を一緒に配置
+    resultElement.innerHTML = `
+      <div class="daikichi-aura"></div>
+      <span class="daikichi-impact">✨大吉✨</span>
+    `;
+  }, 2000);
+     
   } else {
+    if (drawAudio) {
+      drawAudio.currentTime = 0;
+      drawAudio.play().catch((err: Error) => console.log("通常音再生エラー:", err));
+    }
     // 大吉以外は普通に表示
     resultElement.textContent = result;
     resultElement.classList.remove("gekiaTsu");
