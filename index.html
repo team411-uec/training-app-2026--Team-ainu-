@@ -15,6 +15,10 @@
         margin: 24px;
         font-family: sans-serif;
         line-height: 1.6;
+        background-image: url("haikei.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
       }
 
       .omikuji-result {
@@ -262,12 +266,69 @@
           transform: translate(1px, 2px) scale(1);
         }
       }
+      /* 「大吉」文字専用のインパクトスタイル */
+.daikichi-impact {
+  display: inline-block;
+  font-size: 1.3em;
+  font-weight: 900;
+  
+  /* 黄金グラデーション文字 */
+  background: linear-gradient(180deg, #fff2a3 0%, #ffd700 50%, #b8860b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  /* 画面手前にドカンと飛んでくるアニメーション */
+  animation: daikichi-drop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  filter: drop-shadow(0 0 20px #ffea00);
+  position: relative;
+  z-index: 2;
+}
+
+/* 後方で回転する集中線オーラ */
+.daikichi-aura {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(255, 215, 0, 0.4) 0deg 15deg,
+    transparent 15deg 30deg
+  );
+  border-radius: 50%;
+  animation: aura-spin 4s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- アニメーション定義 --- */
+
+/* 奥から手前にドカンと落下して叩きつけられる */
+@keyframes daikichi-drop {
+  0% {
+    transform: scale(4) translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 後光がくるくる回転する */
+@keyframes aura-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
     </style>
   </head>
 
   <body>
-    <h1>おみくじアプリ</h1>
-    <p>「おみくじを引く」ボタンを押してみましょう。</p>
+    <h1 class="daimei" style="color: white;">おみくじアプリ</h1>
+    <p style="color: white; background-color: black; width: 400px;">
+    「おみくじを引く」ボタンを押してみましょう。
+    </p>
 
     <!--
       結果を表示する場所。render.ts が id="result" を取得して書き換える。
@@ -298,6 +359,14 @@
     <div id="remaining" class="count">0</div>
     <ul id="history" class="omikuji-history"></ul>
     <!-- TypeScript を読み込む（Vite が変換する）。 -->
+    <audio id="gekiatsu-sound" preload="auto">
+  <source src="OgGTKDf6.mp3" type="audio/mp3">
+</audio>
+
+   <audio id="daikichi-sound" preload="auto">
+  <source src="y2mateis-best_v9Qhmg9p.mp3" type="audio/mp3">
+</audio>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
