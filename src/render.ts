@@ -60,6 +60,31 @@ export function renderApp(): void {
   }
 }
 
+const button = document.getElementById('draw-button') as HTMLButtonElement | null;
+const audio = document.getElementById('draw-sound') as HTMLAudioElement | null;
+
+if (button && audio) {
+  button.addEventListener('click', () => {
+    audio.currentTime = 0; // 音声を先頭に戻す（連続クリック対応）
+    audio.play().catch((error) => {
+      console.log('再生がブロックされました:', error);
+    });
+  });
+}
+
+const button2 = document.getElementById('reset-button') as HTMLButtonElement | null;
+const audio2 = document.getElementById('reset-sound') as HTMLAudioElement | null;
+
+if (button2 && audio2) {
+  button2.addEventListener('click', () => {
+    audio2.currentTime = 0; // 音声を先頭に戻す（連続クリック対応）
+    audio2.play().catch((error) => {
+      console.log('再生がブロックされました:', error);
+    });
+  });
+}
+
+
 // 拡張ポイント（ステップ2以降）。必要になったら関数を足す。
 //  - 履歴をリスト表示する: document.createElement で <li> を作り、<ul id="history"> に足す関数。
 //  - 残りくじ枚数を表示する: omikuji.ts に残数を返す関数を足したうえで表示用の関数を足す。
