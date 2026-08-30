@@ -18,16 +18,93 @@
       }
 
       .omikuji-result {
-        margin: 16px 0;
-        padding: 16px;
-        font-size: 32px;
-        text-align: center;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        height: 48px;
+        position: relative;
+        margin: 30px auto;
+        width: min(700px, 85vw);
+        min-height: 220px;
+
         display: flex;
-        align-content: center;
         align-items: center;
+        justify-content: center;
+
+        box-sizing: border-box;
+        padding: 30px;
+
+        font-size: 56px;
+        font-weight: 900;
+        letter-spacing: 8px;
+        text-align: center;
+
+        color: #fff;
+
+        /* パチンコ液晶っぽい黒〜赤の背景 */
+        background: radial-gradient(
+          circle at center,
+          #5c0000 0%,
+          #210000 45%,
+          #050505 100%
+        );
+
+        /* 金色の枠 */
+        border: 8px solid #d4af37;
+        border-radius: 18px;
+
+        /* 外側の筐体っぽい影 */
+        box-shadow:
+          0 0 0 5px #111,
+          0 0 0 10px #8c6b18,
+          0 0 25px rgba(255, 200, 0, 0.8),
+          inset 0 0 30px rgba(255, 0, 0, 0.5);
+
+        overflow: hidden;
+
+        /* 結果が表示されたときの発光 */
+        animation: result-glow 1.5s ease-in-out infinite alternate;
+      }
+
+      /* 液晶画面の走査線っぽい演出 */
+      .omikuji-result::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background: repeating-linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.03) 0px,
+          rgba(255, 255, 255, 0.03) 2px,
+          transparent 2px,
+          transparent 6px
+        );
+
+        pointer-events: none;
+      }
+
+      /* 中央の結果文字 */
+      .omikuji-result {
+        text-shadow:
+          0 0 5px #fff,
+          0 0 10px #ffcc00,
+          0 0 20px #ff6600,
+          0 0 35px #ff0000;
+      }
+
+      /* 電飾っぽい光 */
+      @keyframes result-glow {
+        from {
+          box-shadow:
+            0 0 0 5px #111,
+            0 0 0 10px #8c6b18,
+            0 0 20px rgba(255, 180, 0, 0.5),
+            inset 0 0 25px rgba(255, 0, 0, 0.4);
+        }
+
+        to {
+          box-shadow:
+            0 0 0 5px #111,
+            0 0 0 10px #d4af37,
+            0 0 45px rgba(255, 220, 0, 1),
+            inset 0 0 40px rgba(255, 0, 0, 0.7);
+        }
       }
 
       .omikuji-controls {
@@ -45,22 +122,22 @@
 
       .btn--orange {
         transition: all 0.1s ease;
-       color: #fff;
-       background-color: #eb6100;
-       border-bottom: 5px solid #b84c00;
-       font-size: 24px;
-       padding: 16px 36px;
-       border-radius: 8px;
+        color: #fff;
+        background-color: #eb6100;
+        border-bottom: 5px solid #b84c00;
+        font-size: 24px;
+        padding: 16px 36px;
+        border-radius: 8px;
       }
       .btn--orange:hover {
-       color: #fff;
-       background: #f5dd00;
-       box-shadow: 0 0 12px rgba(255,251,0,0.6);
-       border-bottom-width: 1px;
+        color: #fff;
+        background: #f5dd00;
+        box-shadow: 0 0 12px rgba(255, 251, 0, 0.6);
+        border-bottom-width: 1px;
       }
       .btn--shadow {
-       -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-       box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+        -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
       }
 
       .btn--orange:active {
@@ -71,48 +148,120 @@
       .btn--reset {
         font-size: 18px;
         padding: 12px 24px;
-  color: #00f2fe;
-  background-color: #1a1d24;
-  border: 1px solid #00f2fe;
-  border-bottom: 5px solid #008891;
-  border-radius: 4px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  transition: all 0.1s ease;
-}
+        color: #00f2fe;
+        background-color: #1a1d24;
+        border: 1px solid #00f2fe;
+        border-bottom: 5px solid #008891;
+        border-radius: 4px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        transition: all 0.1s ease;
+      }
 
-/* ホバー時の効果 */
-.btn--reset:hover {
-  color: #ffffff;
-  background-color: #00889a;
-  transform: translateY(3px);
-  border-bottom-width: 2px;
-}
+      /* ホバー時の効果 */
+      .btn--reset:hover {
+        color: #ffffff;
+        background-color: #00889a;
+        transform: translateY(3px);
+        border-bottom-width: 2px;
+      }
 
-/* クリックした瞬間 */
-.btn--reset:active {
-  transform: translateY(5px);
-  border-bottom-width: 0px;
-}
+      /* クリックした瞬間 */
+      .btn--reset:active {
+        transform: translateY(5px);
+        border-bottom-width: 0px;
+      }
 
-.count {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin: 10px auto 0;
-  padding: 8px 20px;
+      .count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin: 10px auto 0;
+        padding: 8px 20px;
 
-  background: #ffffff;
-  border: 2px solid #e0e0e0;
-  border-radius: 50px; /* 丸みを持たせる */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  
-  font-size: 15px;
-  font-weight: bold;
-  color: #555555;
-  transition: all 0.3s ease;
-}
+        background: #ffffff;
+        border: 2px solid #e0e0e0;
+        border-radius: 50px; /* 丸みを持たせる */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+        font-size: 15px;
+        font-weight: bold;
+        color: #555555;
+        transition: all 0.3s ease;
+      }
+      /* =========================
+   大吉：激アツ演出
+   ========================= */
+
+      .omikuji-result.gekiaTsu {
+        animation:
+          gekiaTsu-flash 0.18s infinite alternate,
+          gekiaTsu-shake 0.08s infinite;
+
+        color: #fff700;
+
+        text-shadow:
+          0 0 5px #ffffff,
+          0 0 10px #fff700,
+          0 0 20px #ff9900,
+          0 0 40px #ff0000,
+          0 0 70px #ff0000;
+
+        border-color: #fff700;
+
+        background: radial-gradient(
+          circle at center,
+          #ffcc00 0%,
+          #ff3300 30%,
+          #800000 65%,
+          #050505 100%
+        );
+      }
+
+      /* 激しく明滅 */
+      @keyframes gekiaTsu-flash {
+        from {
+          box-shadow:
+            0 0 0 5px #111,
+            0 0 0 10px #d4af37,
+            0 0 30px #ff0000,
+            0 0 60px #ffcc00,
+            inset 0 0 30px #ff0000;
+        }
+
+        to {
+          box-shadow:
+            0 0 0 5px #fff,
+            0 0 0 12px #fff700,
+            0 0 50px #ff0000,
+            0 0 100px #ffff00,
+            inset 0 0 60px #ffff00;
+        }
+      }
+
+      /* パチンコ台っぽく少し揺らす */
+      @keyframes gekiaTsu-shake {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+
+        25% {
+          transform: translate(-2px, 1px) scale(1.02);
+        }
+
+        50% {
+          transform: translate(2px, -1px) scale(1.03);
+        }
+
+        75% {
+          transform: translate(-1px, -2px) scale(1.02);
+        }
+
+        100% {
+          transform: translate(1px, 2px) scale(1);
+        }
+      }
     </style>
   </head>
 
@@ -128,7 +277,9 @@
 
     <!-- 操作ボタン。クリック時の処理は main.ts で結びつけている。 -->
     <div class="omikuji-controls">
-      <button class="btn--orange btn--shadow" id="draw-button">おみくじを引く</button>
+      <button class="btn--orange btn--shadow" id="draw-button">
+        おみくじを引く
+      </button>
       <button class="btn--reset btn--shadow" id="reset-button">リセット</button>
     </div>
 
