@@ -24,14 +24,19 @@
         text-align: center;
         border: 1px solid #ccc;
         border-radius: 8px;
+        height: 48px;
+        display: flex;
+        align-content: center;
+        align-items: center;
       }
 
       .omikuji-controls {
         display: flex;
         align-items: center;
         gap: 20px;
-        margin-top: 32px;
+        margin: 32px;
         justify-content: center;
+        height: 70px;
       }
 
       .omikuji-controls button {
@@ -51,7 +56,7 @@
        color: #fff;
        background: #f5dd00;
        box-shadow: 0 0 12px rgba(255,251,0,0.6);
-       transform: translateY(3px);
+       border-bottom-width: 1px;
       }
       .btn--shadow {
        -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
@@ -89,6 +94,25 @@
   transform: translateY(5px);
   border-bottom-width: 0px;
 }
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 10px auto 0;
+  padding: 8px 20px;
+
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 50px; /* 丸みを持たせる */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  
+  font-size: 15px;
+  font-weight: bold;
+  color: #555555;
+  transition: all 0.3s ease;
+}
     </style>
   </head>
 
@@ -113,9 +137,8 @@
         - 残りくじ枚数を出す → <div id="remaining">
         - 引いた履歴を出す   → <ul id="history"> に <li> を足していく
     -->
-    <div id="remaining" class="omikuji-remaining"></div>
+    <div id="remaining" class="count">0</div>
     <ul id="history" class="omikuji-history"></ul>
-
     <!-- TypeScript を読み込む（Vite が変換する）。 -->
     <script type="module" src="/src/main.ts"></script>
   </body>

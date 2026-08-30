@@ -17,6 +17,7 @@ import type { OmikujiResult } from "./omikuji";
 export function renderResult(result: OmikujiResult | null): void {
   // ステップ0 ではコンソールに結果が出るだけ。
   console.log("引いた結果:", result);
+  renderApp();
 
   // TODO（ステップ1）: ここに DOM 操作を書いて、画面に結果を表示する。
 
@@ -33,6 +34,22 @@ export function renderResult(result: OmikujiResult | null): void {
     resultElement.textContent = result;
   }
 }
+
+// 1. omikuji.ts から getRemainingCount をインポート
+import { drawOmikuji, getRemainingCount} from "./omikuji";
+
+export function renderApp(): void {
+  // 例: 残り枚数を取得してコンソールや画面に表示する
+  const remaining = getRemainingCount();
+  console.log(`現在の残りくじ枚数: ${remaining}枚`);
+
+  // HTML要素に出力する場合の例:
+  const countEl = document.getElementById("remaining");
+  if (countEl) {
+     countEl.textContent = `残りくじ: ${remaining}枚`;
+   }
+}
+
 
 // 拡張ポイント（ステップ2以降）。必要になったら関数を足す。
 //  - 履歴をリスト表示する: document.createElement で <li> を作り、<ul id="history"> に足す関数。
