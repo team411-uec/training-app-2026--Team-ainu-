@@ -86,7 +86,7 @@ export function renderResult(result: OmikujiResult | null): void {
       resultElement.innerHTML = `
         <div class="daikichi-aura"></div>
         <div class="result-card">
-          <img src="test1.jpg" alt="大吉" class="result-image daikichi-image" />
+          <img src="atari1.jpg" alt="大吉" class="result-image daikichi-image" />
         <span class="daikichi-impact">✨大吉✨</span>
         <p class="result-comment"></p>
         </div>
